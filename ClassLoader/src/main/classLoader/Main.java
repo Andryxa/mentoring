@@ -11,12 +11,14 @@ public class Main {
                 If you enter 2, will load class Loop.""");
         int num = scanner.nextInt();
         if (num == 1) Hello.say();
-        else {
-            if (num == 2) {
-                System.out.println("inter size of loop");
-                int size = scanner.nextInt();
-                Loop.start(size);
-            }
+        else if (num == 2) {
+            System.out.println("Inter size of loop");
+            int size = scanner.nextInt();
+            Loop.start(size);
+        } else {
+            System.out.println("no class found");
         }
     }
+
 }
+
