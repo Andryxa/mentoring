@@ -1,5 +1,22 @@
 package main.classLoader;
 
-public class Main {
+import java.util.Scanner;
 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("""
+                Choose witch class load.
+                If you enter 1, will load class Hello.
+                If you enter 2, will load class Loop.""");
+        int num = scanner.nextInt();
+        if (num == 1) Hello.say();
+        else {
+            if (num == 2) {
+                System.out.println("inter size of loop");
+                int size = scanner.nextInt();
+                Loop.start(size);
+            }
+        }
+    }
 }
