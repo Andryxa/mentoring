@@ -1,2 +1,4 @@
-package main.multithreading;public class Main {
+package main.multithreading;
+
+public class Main {
 }
