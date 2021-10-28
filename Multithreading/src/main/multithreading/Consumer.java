@@ -4,8 +4,12 @@ public class Consumer implements Runnable {
 
     @Override
     public void run() {
-        SharedResource res = new SharedResource();
-        res.minus();
+        SharedResource res = SharedResource.getInstance();
+        while (true) {
+            if (res.getResource() > 5) {
+                res.minus();
+            } else break;
+        }
     }
 }
 
