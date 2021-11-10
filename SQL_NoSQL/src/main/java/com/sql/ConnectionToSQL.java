@@ -35,7 +35,8 @@ public class ConnectionToSQL {
                     System.out.println("If you want to show all users press 1 \n" +
                             "If you want to add new user press 2 \n" +
                             "If you want to delete user press 3 \n" +
-                            "If you want search user by ID press 4");
+                            "If you want search user by ID press 4 \n" +
+                            "If you want to quit press q");
                     int method = scanner.nextInt();
                     if (method == 1) {
                         String query = "select * from users";
@@ -49,10 +50,9 @@ public class ConnectionToSQL {
                         //Add new user
                     } else if (method == 2) {
                         System.out.println("Insert surname");
-
                         try {
                             String query = "INSERT INTO library.users (name) \n" +
-                                    "VALUES ('" + scanner.nextLine() + "');";
+                                    "VALUES ('" + scanner.next() + "');";
                             stmt.executeUpdate(query);
                         } catch (SQLException throwable) {
                             throwable.printStackTrace();

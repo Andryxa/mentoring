@@ -14,7 +14,7 @@ public class Main {
             connectionToSQL.start();
         } else if (selection == 2) {
             ConnectionToNoSQL connectionToNoSQL = new ConnectionToNoSQL();
-
+            connectionToNoSQL.start();
         }
     }
 }
