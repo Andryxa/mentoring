@@ -1,10 +1,14 @@
 package main.multithreading;
 
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Main {
     public static void main(String[] args) {
-        Thread consumer = new Thread(new Consumer());
-        Thread producer = new Thread(new Producer());
-        consumer.start();
-        producer.start();
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        executorService.execute(new Consumer());
+        executorService.execute(new Producer());
+        executorService.shutdown();
     }
 }

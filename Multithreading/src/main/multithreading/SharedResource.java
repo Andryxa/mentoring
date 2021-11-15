@@ -1,8 +1,10 @@
 package main.multithreading;
 
 
-public class SharedResource {
+import java.util.concurrent.locks.ReentrantLock;
 
+public class SharedResource {
+    ReentrantLock locker = new ReentrantLock();
     private int resource = 10;
     private static SharedResource instance;
 
@@ -17,20 +19,28 @@ public class SharedResource {
     }
 
     public void minus() {
-        synchronized (instance) {
+        locker.lock();
+        try {
             resource--;
             System.out.println("minus 1, left: " + resource);
+        } finally {
+            locker.unlock();
         }
+
     }
 
     public void plus() {
-        synchronized (instance) {
+        locker.lock();
+        try {
             resource++;
             System.out.println("plus 1, left: " + resource);
+        } finally {
+            locker.unlock();
         }
+
     }
 
-    public synchronized int getResource() {
+    public int getResource() {
         return resource;
     }
 }
