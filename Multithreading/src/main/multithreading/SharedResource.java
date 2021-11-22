@@ -4,7 +4,7 @@ package main.multithreading;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class SharedResource {
-    ReentrantLock locker = new ReentrantLock();
+    private ReentrantLock locker = new ReentrantLock();
     private int resource = 10;
     private static SharedResource instance;
 
