@@ -1,9 +1,7 @@
 package com.andryxa.mentoring.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -42,7 +40,9 @@ public class Client {
         this.lastName = lastName;
     }
 
-
+    @OneToMany
+    @JoinColumn(name = "ownerId")
+    private List<Account> accounts;
 
     @Override
     public boolean equals(Object o) {

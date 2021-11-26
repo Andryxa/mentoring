@@ -10,7 +10,7 @@ public class Account {
     private int id;
     private String name;
     private String password;
-
+    private int ownerId;
     @Id
     @Column(name = "Id")
     public int getId() {
@@ -40,6 +40,13 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Basic
+    @Column(name = "ownerID")
+    public int getOwnerId() { return ownerId;}
+
+    public void setOwnerId(int ownerId) {this.ownerId = ownerId;}
+
 
     @Override
     public boolean equals(Object o) {

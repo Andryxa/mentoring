@@ -31,6 +31,9 @@ public class AccountFunctional {
             System.out.println("Print password");
             String password = scanner.next();
             account.setPassword(password);
+            System.out.println("Print ownerId");
+            int ownerId = scanner.nextInt();
+            account.setOwnerId(ownerId);
             entityManager.persist(account);
             transaction.commit();
         } finally {
