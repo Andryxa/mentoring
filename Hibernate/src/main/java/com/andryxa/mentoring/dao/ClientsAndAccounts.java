@@ -17,11 +17,11 @@ public class ClientsAndAccounts {
 
     public static void start() {
 
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Account> criteriaQuery = cb.createQuery(Account.class);
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Account> criteriaQuery = criteriaBuilder.createQuery(Account.class);
         Root<Account> accountRoot = criteriaQuery.from(Account.class);
-        List<Account> accountList = entityManager.createQuery(criteriaQuery.select(accountRoot).orderBy(cb.asc(accountRoot.get("ownerId")))).getResultList();
-        CriteriaQuery<Client> clientCriteriaQuery = cb.createQuery(Client.class);
+        List<Account> accountList = entityManager.createQuery(criteriaQuery.select(accountRoot).orderBy(criteriaBuilder.asc(accountRoot.get("ownerId")))).getResultList();
+        CriteriaQuery<Client> clientCriteriaQuery = criteriaBuilder.createQuery(Client.class);
         Root<Client> clientRoot = clientCriteriaQuery.from(Client.class);
         List<Client> qw = entityManager.createQuery(clientCriteriaQuery.select(clientRoot)).getResultList();
         for (Client client : qw) {

@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("If you want to work with table 'clients' press 1\n" +
                 "If you want to work with table 'accounts' press 2\n" +
-                "Шf you want to see all clients and their accounts press 3");
+                "If you want to see all clients and their accounts press 3");
         int choice = scanner.nextInt();
         if (choice == 1) {
             ClientMenu.start();
