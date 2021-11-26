@@ -4,12 +4,11 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="default">
-
-
-
+        <class>com.andryxa.mentoring.entity.Account</class>
+        <class>com.andryxa.mentoring.entity.Client</class>
         <properties>
             <property name="hibernate.connection.url"
-                      value="jdbc:mysql://localhost:3306/accounts?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+                      value="jdbc:mysql://localhost:3306/clients?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.connection.username" value="root"/>

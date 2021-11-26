@@ -1,10 +1,12 @@
 package com.andryxa.mentoring.dao;
 
-import com.andryxa.mentoring.entity.ClientEntity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import com.andryxa.mentoring.entity.Client;
+
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
 import java.util.Scanner;
 
 public class ClientFunctional {
@@ -13,40 +15,27 @@ public class ClientFunctional {
     static EntityManager entityManager = entityManagerFactory.createEntityManager();
     static EntityTransaction transaction = entityManager.getTransaction();
 
-    public static void main(String[] args) {
-        System.out.println("Add client press 1\n" +
-                "Delete client press 2\n" +
-                "Show all clients press 3");
-        int method = scanner.nextInt();
-        if (method == 1) {
-            addClient();
-        } else if (method == 2) {
-            deleteClient();
-        } else if (method == 3) {
-
-        }
-    }
-
 
     public static void addClient() {
 
         try {
             transaction.begin();
 
-            ClientEntity pupkin = new ClientEntity();
+            Client client = new Client();
             System.out.println("Print Name");
             String name = scanner.next();
-            pupkin.setFirstName(name);
+            client.setFirstName(name);
             System.out.println("Enter lastname");
             String lastname = scanner.next();
-            pupkin.setLastName(lastname);
-            entityManager.persist(pupkin);
+            client.setLastName(lastname);
+            entityManager.persist(client);
 
 
             transaction.commit();
         } finally {
             if (transaction.isActive()) {
                 transaction.rollback();
+
             }
             entityManager.close();
             entityManagerFactory.close();
@@ -59,9 +48,10 @@ public class ClientFunctional {
             transaction.begin();
             System.out.println("Enter Id");
             Integer id = scanner.nextInt();
-            ClientEntity movie = entityManager.find(ClientEntity.class, id);
-            entityManager.remove(movie);
+            Client client = entityManager.find(Client.class, id);
+            entityManager.remove(client);
             transaction.commit();
+
         } finally {
             if (transaction.isActive()) {
                 transaction.rollback();
@@ -70,5 +60,23 @@ public class ClientFunctional {
             entityManagerFactory.close();
         }
     }
+
+    public static void allClients() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
+        Root<Client> c = cq.from(Client.class);
+        List<Client> qq = entityManager.createQuery(cq.select(c)).getResultList();
+        for (Client client : qq) {
+            int id = client.getId();
+            String firstname = client.getFirstName();
+            String lastname = client.getLastName();
+            System.out.println("id:" + id + " firstName: " + firstname + " lastName: " + lastname);
+
+        }
+    }
+
 }
+
+
+
 

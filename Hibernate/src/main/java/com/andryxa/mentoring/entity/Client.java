@@ -1,10 +1,13 @@
 package com.andryxa.mentoring.entity;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
-@Table(name = "client", schema = "accounts", catalog = "")
-public class ClientEntity {
+public class Client {
     private int id;
     private String firstName;
     private String lastName;
@@ -20,7 +23,7 @@ public class ClientEntity {
     }
 
     @Basic
-    @Column(name = "first_name")
+    @Column(name = "firstName")
     public String getFirstName() {
         return firstName;
     }
@@ -30,7 +33,7 @@ public class ClientEntity {
     }
 
     @Basic
-    @Column(name = "last_name")
+    @Column(name = "lastName")
     public String getLastName() {
         return lastName;
     }
@@ -39,18 +42,18 @@ public class ClientEntity {
         this.lastName = lastName;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ClientEntity that = (ClientEntity) o;
+        Client client = (Client) o;
 
-        if (id != that.id) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-
-        return true;
+        if (id != client.id) return false;
+        if (!Objects.equals(firstName, client.firstName)) return false;
+        return Objects.equals(lastName, client.lastName);
     }
 
     @Override
