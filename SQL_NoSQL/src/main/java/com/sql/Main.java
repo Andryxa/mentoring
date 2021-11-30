@@ -1,5 +1,8 @@
-package main.java.com.sql;
+package com.sql;
 
+
+import com.sql.menu.ConnectionToNoSQL;
+import com.sql.menu.ConnectionToSQL;
 
 import java.util.Scanner;
 

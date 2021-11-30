@@ -1,20 +1,19 @@
-package main.java.com.sql;
+package com.sql.menu;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
-import java.util.Map;
 import java.util.Scanner;
-import java.util.function.Consumer;
+
+import static com.sql.dao.NoSQLFunctional.*;
 
 public class ConnectionToNoSQL {
 
-    private static Scanner scanner = new Scanner(System.in);
-    private static MongoCollection<Document> collection;
+    private static final Scanner scanner = new Scanner(System.in);
+    public static MongoCollection<Document> collection;
 
     public void start() {
         try {
@@ -51,8 +50,10 @@ public class ConnectionToNoSQL {
                     }
                 } else if (coll == 2) {
                     collection = database.getCollection("books");
-                    System.out.println("If you want to show all books press 1 \n" +
-                            "If you want to show available books press 2 \n");
+                    System.out.println("""
+                            If you want to show all books press 1\s
+                            If you want to show available books press 2\s
+                            """);
                     int method = scanner.nextInt();
                     if (method == 1) {
                         showAll();
@@ -61,41 +62,9 @@ public class ConnectionToNoSQL {
                     }
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void showAll() {
-        collection.find()
-                .forEach((Consumer<Document>) System.out::println);
-    }
-
-    private static void addNewUser() {
-        System.out.println("Enter name");
-        String name = scanner.next();
-        var newDocument = new Document(Map.of("name", name));
-        collection.insertOne(newDocument);
-    }
-
-    private static void deleteUser() {
-        System.out.println("Enter name");
-        String name = scanner.next();
-        var newDocument = new Document(Map.of("name", name));
-        collection.findOneAndDelete(newDocument);
-    }
-
-    private static void searchUser() {
-        System.out.println("Enter name");
-        String name = scanner.next();
-        collection.find(new Document("name", new Document("$regex", name)))
-                .forEach((Consumer<Document>) System.out::println);
-    }
-
-    private static void availableBooks() {
-        collection.find(Filters.eq("available", true))
-                .forEach((Consumer<Document>) System.out::println);
     }
 }
 
