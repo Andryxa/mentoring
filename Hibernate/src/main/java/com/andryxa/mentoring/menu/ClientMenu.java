@@ -5,9 +5,10 @@ import com.andryxa.mentoring.dao.ClientFunctional;
 import java.util.Scanner;
 
 public class ClientMenu {
-    static Scanner scanner = new Scanner(System.in);
+
 
     public static void start() {
+        final Scanner scanner = new Scanner(System.in);
         ClientFunctional clientFunctional = new ClientFunctional();
         System.out.println("Add client press 1\n" +
                 "Delete client press 2\n" +
