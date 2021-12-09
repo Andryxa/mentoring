@@ -6,11 +6,11 @@ import com.andryxa.mentoring.entity.Client;
 import java.util.List;
 import java.util.Scanner;
 
-public class ClientMenuImpl {
-    private ClientFunctional clientFunctional;
-    private Scanner scanner;
+public class ClientMenu {
+    private final ClientFunctional clientFunctional;
+    private final Scanner scanner;
 
-    public ClientMenuImpl(Scanner scanner, ClientFunctional clientFunctional) {
+    public ClientMenu(Scanner scanner, ClientFunctional clientFunctional) {
         this.clientFunctional = clientFunctional;
         this.scanner = scanner;
     }

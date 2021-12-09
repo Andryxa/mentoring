@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountMenu {
-    private AccountFunctional accountFunctional;
-    private Scanner scanner;
+    private final AccountFunctional accountFunctional;
+    private final Scanner scanner;
 
     public AccountMenu(final Scanner scanner, final AccountFunctional accountFunctional) {
         this.accountFunctional = accountFunctional;
