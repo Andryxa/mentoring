@@ -17,7 +17,6 @@ public class SQLMenu {
     }
 
     public void start() {
-        connect();
 
         System.out.println("If you want to use table 'users' press 1 \n" +
                 "If you want to use table 'books' press 2");
@@ -62,25 +61,21 @@ public class SQLMenu {
         }
     }
 
-    private void connect() {
-        methods.connect();
-    }
-
     private void searchUser() {
         System.out.println("Enter user surname");
         String surname = scanner.next();
-        List search = methods.searchUser(surname);
-        search.forEach((s) -> System.out.println(s));
+        List<String> search = methods.searchUser(surname);
+        search.forEach(System.out::println);
     }
 
     private void availableBooks() {
-        List books = methods.availableBooks();
-        books.forEach((s) -> System.out.println(s));
+        List<String> books = methods.availableBooks();
+        books.forEach(System.out::println);
     }
 
     private void printAll() {
-        List all = methods.showAll(table);
-        all.forEach((s) -> System.out.println(s));
+        List<String> all = methods.showAll(table);
+        all.forEach(System.out::println);
 
     }
 

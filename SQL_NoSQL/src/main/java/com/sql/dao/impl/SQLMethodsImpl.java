@@ -12,20 +12,10 @@ public class SQLMethodsImpl implements DbMethods {
     private Connection connection;
     private ResultSet resultSet;
 
-
-    @Override
-    public void connect() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            String username = "root";
-            String password = "password";
-            String url = "jdbc:mysql://localhost:3306/library?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-            connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Connection to MySQL successfully!");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public SQLMethodsImpl(String username, String password, String url) {
+        this.username = username;
+        this.password = password;
+        this.url = url;
     }
 
     @Override
@@ -43,22 +33,28 @@ public class SQLMethodsImpl implements DbMethods {
 
     @Override
     public void deleteUser(int id) {
+        Connection connection = getConnection();
+        Statement statement = null;
         String query = "delete from users where ID = " + id + ";";
         try {
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
             statement.executeUpdate(query);
-            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close(statement, connection);
         }
     }
 
     @Override
-    public List searchUser(String surname) {
-        List search = new ArrayList();
+    public List<String> searchUser(String surname) {
+        Connection connection = getConnection();
+        Statement statement = null;
+        ResultSet resultSet;
+        List<String> search = new ArrayList<>();
         String query = "select * from users where name = '" + surname + "';";
         try {
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
@@ -66,19 +62,23 @@ public class SQLMethodsImpl implements DbMethods {
                 String user = ("id:" + id + " surname: " + name);
                 search.add(user);
             }
-            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close(statement, connection);
         }
         return search;
     }
 
     @Override
-    public List showAll(String table) {
-        List list = new ArrayList();
+    public List<String> showAll(String table) {
+        Connection connection = getConnection();
+        Statement statement = null;
+        ResultSet resultSet;
+        List<String> list = new ArrayList<>();
         String query = "select * from " + table;
         try {
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
@@ -86,19 +86,23 @@ public class SQLMethodsImpl implements DbMethods {
                 String all = ("id: " + id + " name: " + name);
                 list.add(all);
             }
-            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close(statement, connection);
         }
         return list;
     }
 
     @Override
-    public List availableBooks() {
-        List booksList = new ArrayList();
+    public List<String> availableBooks() {
+        Connection connection = getConnection();
+        Statement statement = null;
+        ResultSet resultSet;
+        List<String> booksList = new ArrayList<>();
         String query = "SELECT id, name FROM books WHERE using_by = 1;";
         try {
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
@@ -106,9 +110,10 @@ public class SQLMethodsImpl implements DbMethods {
                 String books = ("id: " + id + " name: " + name);
                 booksList.add(books);
             }
-            statement.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close(statement, connection);
         }
         return booksList;
     }

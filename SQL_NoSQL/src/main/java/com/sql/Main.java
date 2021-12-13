@@ -11,10 +11,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        final String username = "root";
+        final String password = "password";
+        final String url = "jdbc:mysql://localhost:3306/library?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        final String host = "localhost";
+        final int port = 27017;
+        final String databaseName = "library";
         final Scanner scanner = new Scanner(System.in);
-        final DbMethods sqlFunctional = new SQLMethodsImpl();
+        final DbMethods sqlFunctional = new SQLMethodsImpl(username, password, url);
         final SQLMenu sqlMenu = new SQLMenu(scanner, sqlFunctional);
-        final DbMethods noSQLFunctional = new NoSQLMethodsImpl();
+        final DbMethods noSQLFunctional = new NoSQLMethodsImpl(host, port, databaseName);
         final NoSQLMenu noSQLMenu = new NoSQLMenu(noSQLFunctional, scanner);
 
         System.out.println("If you want to use SQL press 1\n" +

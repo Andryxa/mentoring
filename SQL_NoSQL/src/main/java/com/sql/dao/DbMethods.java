@@ -10,9 +10,9 @@ public interface DbMethods {
 
     void deleteUser(int id);
 
-    List searchUser(String surname);
+    List<String> searchUser(String surname);
 
-    List showAll(String table);
+    List<String> showAll(String table);
 
-    List availableBooks();
+    List<String> availableBooks();
 }

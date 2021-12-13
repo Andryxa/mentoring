@@ -18,7 +18,6 @@ public class NoSQLMenu {
     }
 
     public void start() {
-        methods.connect();
 
         System.out.println("If you want to use collection 'users' press 1 \n" +
                 "If you want to use collection 'books' press 2");
