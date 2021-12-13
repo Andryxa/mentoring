@@ -1,9 +1,9 @@
 package com.sql;
 
 
-import com.sql.dao.Functional;
-import com.sql.dao.impl.NoSQLFunctionalImpl;
-import com.sql.dao.impl.SQLFunctionalImpl;
+import com.sql.dao.DbMethods;
+import com.sql.dao.impl.NoSQLMethodsImpl;
+import com.sql.dao.impl.SQLMethodsImpl;
 import com.sql.menu.NoSQLMenu;
 import com.sql.menu.SQLMenu;
 
@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final Scanner scanner = new Scanner(System.in);
-        final Functional  sqlFunctional= new SQLFunctionalImpl();
+        final DbMethods sqlFunctional = new SQLMethodsImpl();
         final SQLMenu sqlMenu = new SQLMenu(scanner, sqlFunctional);
-        final Functional noSQLFunctional = new NoSQLFunctionalImpl();
+        final DbMethods noSQLFunctional = new NoSQLMethodsImpl();
         final NoSQLMenu noSQLMenu = new NoSQLMenu(noSQLFunctional, scanner);
 
         System.out.println("If you want to use SQL press 1\n" +
@@ -22,8 +22,9 @@ public class Main {
         int selection = scanner.nextInt();
         if (selection == 1) {
             sqlMenu.start();
-        } else if (selection == 2) {
-           noSQLMenu.start();
+        }
+        if (selection == 2) {
+            noSQLMenu.start();
         }
     }
 }

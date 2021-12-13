@@ -4,16 +4,13 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import com.sql.dao.Functional;
+import com.sql.dao.DbMethods;
 import org.bson.Document;
 
-import java.util.Map;
-import java.util.function.Consumer;
+import java.util.*;
 
-
-public class NoSQLFunctionalImpl implements Functional {
+public class NoSQLMethodsImpl implements DbMethods {
     private MongoDatabase database;
-    private MongoCollection<Document> collection;
 
 
     @Override
@@ -28,37 +25,43 @@ public class NoSQLFunctionalImpl implements Functional {
 
     @Override
     public void addUser(String surname) {
-        collection = database.getCollection("users");
+        MongoCollection<Document> collection = database.getCollection("users");
         var newDocument = new Document(Map.of("name", surname));
         collection.insertOne(newDocument);
     }
 
     @Override
     public void deleteUser(int id) {
-        collection = database.getCollection("users");
+        MongoCollection<Document> collection = database.getCollection("users");
         var newDocument = new Document(Map.of("id", id));
         collection.findOneAndDelete(newDocument);
     }
 
     @Override
-    public void searchUser(String surname) {
-        collection = database.getCollection("users");
+    public List searchUser(String surname) {
+        List search = new ArrayList();
+        MongoCollection<Document> collection = database.getCollection("users");
         collection.find(new Document("name", new Document("$regex", surname)))
-                .forEach((Consumer<Document>) System.out::println);
+                .into(search);
+        return search;
     }
 
     @Override
-    public void showAll(String table) {
-        collection = database.getCollection(table);
-        collection.find()
-                .forEach((Consumer<Document>) System.out::println);
+    public List showAll(String table) {
+        List list = new ArrayList();
+        MongoCollection<Document> collection = database.getCollection(table);
+        collection.find().into(list);
+        return list;
     }
 
     @Override
-    public void availableBooks() {
-        collection = database.getCollection("books");
+    public List availableBooks() {
+        List booksList = new ArrayList();
+        MongoCollection<Document> collection = database.getCollection("books");
         collection.find(Filters.eq("available", true))
-                .forEach((Consumer<Document>) System.out::println);
+                .into(booksList);
+        return booksList;
     }
+
 
 }

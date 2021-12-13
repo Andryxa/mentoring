@@ -1,15 +1,15 @@
 package com.sql.dao.impl;
 
-import com.sql.dao.Functional;
+import com.sql.dao.DbMethods;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class SQLFunctionalImpl implements Functional {
+public class SQLMethodsImpl implements DbMethods {
 
     private Connection connection;
-    private Statement statement;
     private ResultSet resultSet;
 
 
@@ -22,8 +22,8 @@ public class SQLFunctionalImpl implements Functional {
             String url = "jdbc:mysql://localhost:3306/library?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
             connection = DriverManager.getConnection(url, username, password);
             System.out.println("Connection to MySQL successfully!");
-            statement = connection.createStatement();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | SQLException | ClassNotFoundException | NoSuchMethodException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -33,7 +33,9 @@ public class SQLFunctionalImpl implements Functional {
         String query = "INSERT INTO library.users (name) \n" +
                 "VALUES ('" + surname + "');";
         try {
+            Statement statement = connection.createStatement();
             statement.executeUpdate(query);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,57 +45,71 @@ public class SQLFunctionalImpl implements Functional {
     public void deleteUser(int id) {
         String query = "delete from users where ID = " + id + ";";
         try {
+            Statement statement = connection.createStatement();
             statement.executeUpdate(query);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void searchUser(String surname) {
-        String query = "select id, name from users where name = '" + surname + "';";
+    public List searchUser(String surname) {
+        List search = new ArrayList();
+        String query = "select * from users where name = '" + surname + "';";
         try {
+            Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String name = resultSet.getString(2);
-                System.out.printf("id: %d, surname: %s ", id, name);
-                System.out.println();
+                String user = ("id:" + id + " surname: " + name);
+                search.add(user);
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return search;
     }
 
     @Override
-    public void showAll(String table) {
+    public List showAll(String table) {
+        List list = new ArrayList();
         String query = "select * from " + table;
         try {
+            Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String name = resultSet.getString(2);
-                System.out.printf("id: %d, name: %s ", id, name);
-                System.out.println();
+                String all = ("id: " + id + " name: " + name);
+                list.add(all);
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return list;
     }
 
     @Override
-    public void availableBooks() {
-        String query = "select id, name from books where using_by = 1;";
+    public List availableBooks() {
+        List booksList = new ArrayList();
+        String query = "SELECT id, name FROM books WHERE using_by = 1;";
         try {
+            Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String name = resultSet.getString(2);
-                System.out.printf("id: %d, name: %s ", id, name);
-                System.out.println();
+                String books = ("id: " + id + " name: " + name);
+                booksList.add(books);
             }
-        } catch (SQLException e) {
+            statement.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        return booksList;
     }
 }
