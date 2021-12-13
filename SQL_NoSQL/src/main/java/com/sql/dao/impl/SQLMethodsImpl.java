@@ -9,8 +9,10 @@ import java.util.List;
 
 public class SQLMethodsImpl implements DbMethods {
 
-    private Connection connection;
-    private ResultSet resultSet;
+    private final String username;
+    private final String password;
+    private final String url;
+
 
     public SQLMethodsImpl(String username, String password, String url) {
         this.username = username;
@@ -18,16 +20,33 @@ public class SQLMethodsImpl implements DbMethods {
         this.url = url;
     }
 
+
     @Override
     public void addUser(String surname) {
+
+        Connection connection = getConnection();
+        Statement statement = null;
         String query = "INSERT INTO library.users (name) \n" +
                 "VALUES ('" + surname + "');";
         try {
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
             statement.executeUpdate(query);
-            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close(statement, connection);
+        }
+    }
+
+    public static void close(AutoCloseable... autoCloseables) {
+        for (AutoCloseable autoCloseable : autoCloseables) {
+            if (autoCloseable != null) {
+                try {
+                    autoCloseable.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -116,5 +135,15 @@ public class SQLMethodsImpl implements DbMethods {
             close(statement, connection);
         }
         return booksList;
+    }
+
+    private Connection getConnection() {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return connection;
     }
 }

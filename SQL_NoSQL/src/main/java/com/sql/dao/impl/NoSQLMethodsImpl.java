@@ -76,6 +76,4 @@ public class NoSQLMethodsImpl implements DbMethods {
 
         return booksList;
     }
-
-
 }

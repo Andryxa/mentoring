@@ -1,6 +1,5 @@
 package com.sql;
 
-
 import com.sql.dao.DbMethods;
 import com.sql.dao.impl.NoSQLMethodsImpl;
 import com.sql.dao.impl.SQLMethodsImpl;

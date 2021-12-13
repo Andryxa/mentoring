@@ -4,8 +4,6 @@ import java.util.List;
 
 public interface DbMethods {
 
-    void connect();
-
     void addUser(String surname);
 
     void deleteUser(int id);
