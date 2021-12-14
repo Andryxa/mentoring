@@ -38,18 +38,6 @@ public class SQLMethodsImpl implements DbMethods {
         }
     }
 
-    public static void close(AutoCloseable... autoCloseables) {
-        for (AutoCloseable autoCloseable : autoCloseables) {
-            if (autoCloseable != null) {
-                try {
-                    autoCloseable.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     @Override
     public void deleteUser(int id) {
         Connection connection = getConnection();
@@ -69,7 +57,7 @@ public class SQLMethodsImpl implements DbMethods {
     public List<String> searchUser(String surname) {
         Connection connection = getConnection();
         Statement statement = null;
-        ResultSet resultSet;
+        ResultSet resultSet = null;
         List<String> search = new ArrayList<>();
         String query = "select * from users where name = '" + surname + "';";
         try {
@@ -84,7 +72,7 @@ public class SQLMethodsImpl implements DbMethods {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            close(statement, connection);
+            close(statement, connection, resultSet);
         }
         return search;
     }
@@ -93,7 +81,7 @@ public class SQLMethodsImpl implements DbMethods {
     public List<String> showAll(String table) {
         Connection connection = getConnection();
         Statement statement = null;
-        ResultSet resultSet;
+        ResultSet resultSet = null;
         List<String> list = new ArrayList<>();
         String query = "select * from " + table;
         try {
@@ -108,7 +96,7 @@ public class SQLMethodsImpl implements DbMethods {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            close(statement, connection);
+            close(statement, connection, resultSet);
         }
         return list;
     }
@@ -117,7 +105,7 @@ public class SQLMethodsImpl implements DbMethods {
     public List<String> availableBooks() {
         Connection connection = getConnection();
         Statement statement = null;
-        ResultSet resultSet;
+        ResultSet resultSet = null;
         List<String> booksList = new ArrayList<>();
         String query = "SELECT id, name FROM books WHERE using_by = 1;";
         try {
@@ -132,7 +120,7 @@ public class SQLMethodsImpl implements DbMethods {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            close(statement, connection);
+            close(statement, connection, resultSet);
         }
         return booksList;
     }
@@ -145,5 +133,17 @@ public class SQLMethodsImpl implements DbMethods {
             e.printStackTrace();
         }
         return connection;
+    }
+
+    private void close(AutoCloseable... autoCloseables) {
+        for (AutoCloseable autoCloseable : autoCloseables) {
+            if (autoCloseable != null) {
+                try {
+                    autoCloseable.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

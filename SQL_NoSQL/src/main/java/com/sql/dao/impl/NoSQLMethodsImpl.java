@@ -73,7 +73,6 @@ public class NoSQLMethodsImpl implements DbMethods {
         MongoCollection<Document> collection = database.getCollection("books");
         collection.find(Filters.eq("available", true))
                 .into(booksList);
-
         return booksList;
     }
 }

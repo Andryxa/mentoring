@@ -63,22 +63,20 @@ public class NoSQLMenu {
     }
 
     private void availableBooks() {
-        List books = methods.availableBooks();
-        books.forEach((s) -> System.out.println(s));
+        List<String> books = methods.availableBooks();
+        books.forEach(System.out::println);
     }
 
     private void showAll() {
-        List list = methods.showAll(table);
-        list.forEach((s) -> System.out.println(s));
+        List<String> list = methods.showAll(table);
+        list.forEach(System.out::println);
     }
 
     private void searchUser() {
         System.out.println("Enter name");
         String surname = scanner.next();
-        List search = methods.searchUser(surname);
-        for (int i = 0; i < search.size(); i++) {
-            System.out.println(search.get(i));
-        }
+        List<String> search = methods.searchUser(surname);
+        search.forEach(System.out::println);
     }
 
     private void deleteUser() {
