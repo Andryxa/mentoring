@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Books {
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,13 +14,13 @@ public class Books {
     private String author;
     private int count;
 
-    public Books(String name, String author, int count) {
+    public Book(String name, String author, int count) {
         this.name = name;
         this.author = author;
         this.count = count;
     }
 
-    public Books() {
+    public Book() {
     }
 
     public int getId() {

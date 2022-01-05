@@ -2,33 +2,33 @@ package ru.andryxa.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.andryxa.spring.entity.Books;
-import ru.andryxa.spring.repo.BooksRepo;
+import ru.andryxa.spring.entity.Book;
+import ru.andryxa.spring.repo.BookRepo;
 
 @RestController
 public class BooksController {
 
-    private final BooksRepo booksRepo;
+    private final BookRepo bookRepo;
 
     @Autowired
-    public BooksController(BooksRepo booksRepo) {
-        this.booksRepo = booksRepo;
+    public BooksController(BookRepo bookRepo) {
+        this.bookRepo = bookRepo;
     }
 
     @GetMapping("/books")
-    public Iterable<Books> showBooks() {
-        return booksRepo.findAll();
+    public Iterable<Book> showBooks() {
+        return bookRepo.findAll();
     }
 
     @PostMapping("/createBook")
     public String newBook(@RequestParam("name") String name,
                           @RequestParam("author") String author,
                           @RequestParam("count") int count) {
-        Books book = new Books();
+        Book book = new Book();
         book.setName(name);
         book.setAuthor(author);
         book.setCount(count);
-        booksRepo.save(book);
+        bookRepo.save(book);
         return "Book added";
     }
 
@@ -37,17 +37,17 @@ public class BooksController {
                              @RequestParam("name") String name,
                              @RequestParam("author") String author,
                              @RequestParam("count") int count) {
-        Books book = booksRepo.findById(id);
+        Book book = bookRepo.findById(id);
         book.setName(name);
         book.setAuthor(author);
         book.setCount(count);
-        booksRepo.save(book);
+        bookRepo.save(book);
         return "Updated!";
     }
 
     @DeleteMapping("/deleteBook")
     public String deleteBook(@RequestParam("id") int id) {
-        booksRepo.deleteById(id);
+        bookRepo.deleteById(id);
         return "deleted!";
     }
 }

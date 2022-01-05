@@ -2,7 +2,7 @@ package ru.andryxa.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.andryxa.spring.entity.Users;
+import ru.andryxa.spring.entity.User;
 import ru.andryxa.spring.repo.UserRepo;
 
 @RestController
@@ -16,7 +16,7 @@ public class UsersController {
     }
 
     @GetMapping("/users")
-    public Iterable<Users> home() {
+    public Iterable<User> home() {
         return userRepo.findAll();
     }
 
@@ -29,7 +29,7 @@ public class UsersController {
     @PostMapping("/createUser")
     public String newUser(@RequestParam("name") String name,
                           @RequestParam("surname") String surname) {
-        Users user = new Users();
+        User user = new User();
         user.setName(name);
         user.setSurname(surname);
         userRepo.save(user);
@@ -41,7 +41,7 @@ public class UsersController {
                              @RequestParam("name") String name,
                              @RequestParam("surname") String surname) {
 
-        Users user = userRepo.findById(id);
+        User user = userRepo.findById(id);
         user.setName(name);
         user.setSurname(surname);
         userRepo.save(user);
