@@ -1,27 +1,19 @@
-package ru.andryxa.spring.entity;
+package ru.andryxa.spring.DTO;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookDTO {
     private int id;
     private String name;
     private String author;
     private int count;
 
-    public Book(int id, String name, String author, int count) {
+    public BookDTO(int id, String name, String author, int count) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.count = count;
     }
 
-    public Book() {
+    public BookDTO() {
     }
 
     public int getId() {
@@ -54,15 +46,5 @@ public class Book {
 
     public void setCount(int count) {
         this.count = count;
-    }
-
-    @Override
-    public String toString() {
-        return "Books{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", count=" + count +
-                '}';
     }
 }

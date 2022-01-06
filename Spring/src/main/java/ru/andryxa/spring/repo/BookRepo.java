@@ -7,5 +7,4 @@ import ru.andryxa.spring.entity.Book;
 
 @Repository
 public interface BookRepo extends JpaRepository<Book, Integer> {
-    Book findById(int id);
 }

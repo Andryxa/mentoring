@@ -2,52 +2,48 @@ package ru.andryxa.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.andryxa.spring.entity.Book;
-import ru.andryxa.spring.repo.BookRepo;
+import ru.andryxa.spring.DTO.BookDTO;
+import ru.andryxa.spring.service.BookService;
+
+import java.util.List;
 
 @RestController
 public class BooksController {
 
-    private final BookRepo bookRepo;
+    private final BookService bookService;
 
     @Autowired
-    public BooksController(BookRepo bookRepo) {
-        this.bookRepo = bookRepo;
+    public BooksController(BookService bookService) {
+        this.bookService = bookService;
     }
 
     @GetMapping("/books")
-    public Iterable<Book> showBooks() {
-        return bookRepo.findAll();
+    public List<BookDTO> showBooks() {
+        return bookService.getListOfBooks();
     }
 
     @PostMapping("/createBook")
-    public String newBook(@RequestParam("name") String name,
-                          @RequestParam("author") String author,
-                          @RequestParam("count") int count) {
-        Book book = new Book();
-        book.setName(name);
-        book.setAuthor(author);
-        book.setCount(count);
-        bookRepo.save(book);
-        return "Book added";
+    public BookDTO newBook(@RequestParam("name") String name,
+                           @RequestParam("author") String author,
+                           @RequestParam("count") int count) {
+        BookDTO bookDTO = new BookDTO(0, name, author, count);
+        bookService.save(bookDTO);
+        return bookDTO;
     }
 
     @PostMapping("/updateBook")
-    public String updateBook(@RequestParam("id") int id,
+    public BookDTO updateBook(@RequestParam("id") int id,
                              @RequestParam("name") String name,
                              @RequestParam("author") String author,
                              @RequestParam("count") int count) {
-        Book book = bookRepo.findById(id);
-        book.setName(name);
-        book.setAuthor(author);
-        book.setCount(count);
-        bookRepo.save(book);
-        return "Updated!";
+        BookDTO bookDTO = new BookDTO(id, name, author, count);
+        bookService.save(bookDTO);
+        return bookDTO;
     }
 
     @DeleteMapping("/deleteBook")
     public String deleteBook(@RequestParam("id") int id) {
-        bookRepo.deleteById(id);
-        return "deleted!";
+        bookService.deleteBook(id);
+        return "Book with id=" + id + " has been deleted!";
     }
 }

@@ -2,49 +2,45 @@ package ru.andryxa.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.andryxa.spring.entity.User;
-import ru.andryxa.spring.repo.UserRepo;
+import ru.andryxa.spring.DTO.UserDTO;
+import ru.andryxa.spring.service.UserService;
+import java.util.List;
 
 @RestController
 public class UsersController {
 
-    private final UserRepo userRepo;
+    private final UserService userService;
 
     @Autowired
-    public UsersController(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public UsersController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public Iterable<User> home() {
-        return userRepo.findAll();
+   @GetMapping("/users")
+    public List<UserDTO> userList() {
+        return userService.getListOfUsers();
+    }
+
+    @PostMapping("/createUser")
+    public UserDTO newUser(@RequestParam("name") String name,
+                           @RequestParam("surname") String surname) {
+        UserDTO user = new UserDTO(0, name, surname);
+        userService.save(user);
+        return user;
+    }
+
+    @PostMapping("/updateUser")
+    public UserDTO updateUser(@RequestParam("id") int id,
+                              @RequestParam("name") String name,
+                              @RequestParam("surname") String surname) {
+        UserDTO userDTO= new UserDTO(id, name, surname);
+        userService.save(userDTO);
+        return userDTO;
     }
 
     @DeleteMapping("/deleteUser")
     public String delete(@RequestParam("id") int id) {
-        userRepo.deleteById(id);
-        return "deleted";
-    }
-
-    @PostMapping("/createUser")
-    public String newUser(@RequestParam("name") String name,
-                          @RequestParam("surname") String surname) {
-        User user = new User();
-        user.setName(name);
-        user.setSurname(surname);
-        userRepo.save(user);
-        return "add new user";
-    }
-
-    @PostMapping("/updateUser")
-    public String updateUser(@RequestParam("id") int id,
-                             @RequestParam("name") String name,
-                             @RequestParam("surname") String surname) {
-
-        User user = userRepo.findById(id);
-        user.setName(name);
-        user.setSurname(surname);
-        userRepo.save(user);
-        return "Updated!!!";
+        userService.delete(id);
+        return "User with id=" + id + " has been deleted!";
     }
 }

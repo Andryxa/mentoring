@@ -6,7 +6,4 @@ import ru.andryxa.spring.entity.User;
 
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer> {
-
-    User findById(int id);
-}
+public interface UserRepo extends JpaRepository<User, Integer> { }

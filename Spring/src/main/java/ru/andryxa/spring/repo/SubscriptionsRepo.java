@@ -6,5 +6,4 @@ import ru.andryxa.spring.entity.Subscriptions;
 
 @RestController
 public interface SubscriptionsRepo extends JpaRepository<Subscriptions, Integer> {
-    Subscriptions findById(int id);
 }
