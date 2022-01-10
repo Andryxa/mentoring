@@ -13,7 +13,6 @@ public class UserDTO {
     }
 
     public UserDTO() {
-
     }
 
     public int getId() {

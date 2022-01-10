@@ -29,7 +29,7 @@ public class UsersController {
         return user;
     }
 
-    @PostMapping("/updateUser")
+    @PutMapping("/updateUser")
     public UserDTO updateUser(@RequestParam("id") int id,
                               @RequestParam("name") String name,
                               @RequestParam("surname") String surname) {

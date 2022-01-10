@@ -31,7 +31,7 @@ public class BooksController {
         return bookDTO;
     }
 
-    @PostMapping("/updateBook")
+    @PutMapping("/updateBook")
     public BookDTO updateBook(@RequestParam("id") int id,
                              @RequestParam("name") String name,
                              @RequestParam("author") String author,

@@ -1,7 +1,6 @@
 package ru.andryxa.spring.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.andryxa.spring.DTO.SubscriptionDTO;
 import ru.andryxa.spring.entity.Subscriptions;
 import ru.andryxa.spring.repo.SubscriptionsRepo;
@@ -9,28 +8,32 @@ import ru.andryxa.spring.repo.SubscriptionsRepo;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class SubscriptionsService {
     private final SubscriptionsRepo subscriptionsRepo;
+    private final UserService userService;
+    private final BookService bookService;
 
-    @Autowired
-    public SubscriptionsService(SubscriptionsRepo subscriptionsRepo) {
+
+    public SubscriptionsService(SubscriptionsRepo subscriptionsRepo, UserService userService, BookService bookService) {
         this.subscriptionsRepo = subscriptionsRepo;
+        this.userService = userService;
+        this.bookService = bookService;
     }
 
     public SubscriptionDTO getSubDTO(Subscriptions subscriptions) {
         SubscriptionDTO subscriptionDTO = new SubscriptionDTO();
-        subscriptionDTO.setId(subscriptions.getId());
-        subscriptionDTO.setUserId(subscriptions.getUserId());
-        subscriptionDTO.setBookId(subscriptions.getBookId());
+        subscriptionDTO.setIdDTO(subscriptions.getId());
+        subscriptionDTO.setUserIdDTO(userService.getUserDTO(subscriptions.getUserId()));
+        subscriptionDTO.setBookIdDTO(bookService.getBookDTO(subscriptions.getBookId()));
         return subscriptionDTO;
     }
 
     public Subscriptions getSub(SubscriptionDTO subscriptionDTO) {
         Subscriptions subscriptions = new Subscriptions();
-        subscriptions.setId(subscriptionDTO.getId());
-        subscriptions.setUserId(subscriptionDTO.getUserId());
-        subscriptions.setBookId(subscriptionDTO.getBookId());
+        subscriptions.setId(subscriptionDTO.getIdDTO());
+        subscriptions.setUserId(userService.getUser(subscriptionDTO.getUserIdDTO()));
+        subscriptions.setBookId(bookService.getBook(subscriptionDTO.getBookIdDTO()));
         return subscriptions;
     }
 

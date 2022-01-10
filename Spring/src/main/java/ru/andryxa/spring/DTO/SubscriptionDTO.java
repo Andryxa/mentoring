@@ -1,43 +1,41 @@
 package ru.andryxa.spring.DTO;
 
-import ru.andryxa.spring.entity.Book;
-import ru.andryxa.spring.entity.User;
 
 public class SubscriptionDTO {
     private int id;
-    private User userId;
-    private Book bookId;
+    private UserDTO userIdDTO;
+    private BookDTO bookIdDTO;
 
-    public SubscriptionDTO(int id, User userId, Book bookId) {
+    public SubscriptionDTO(int id, UserDTO userIdDTO, BookDTO bookIdDTO) {
         this.id = id;
-        this.userId = userId;
-        this.bookId = bookId;
+        this.userIdDTO = userIdDTO;
+        this.bookIdDTO = bookIdDTO;
     }
 
     public SubscriptionDTO() {
     }
 
-    public int getId() {
+    public int getIdDTO() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setIdDTO(int id) {
         this.id = id;
     }
 
-    public User getUserId() {
-        return userId;
+    public UserDTO getUserIdDTO() {
+        return userIdDTO;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserIdDTO(UserDTO userIdDTO) {
+        this.userIdDTO = userIdDTO;
     }
 
-    public Book getBookId() {
-        return bookId;
+    public BookDTO getBookIdDTO() {
+        return bookIdDTO;
     }
 
-    public void setBookId(Book bookId) {
-        this.bookId = bookId;
+    public void setBookIdDTO(BookDTO bookIdDTO) {
+        this.bookIdDTO = bookIdDTO;
     }
 }

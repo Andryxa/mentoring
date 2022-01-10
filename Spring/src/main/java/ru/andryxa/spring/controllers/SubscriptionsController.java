@@ -2,9 +2,9 @@ package ru.andryxa.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.andryxa.spring.DTO.BookDTO;
 import ru.andryxa.spring.DTO.SubscriptionDTO;
-import ru.andryxa.spring.entity.Book;
-import ru.andryxa.spring.entity.User;
+import ru.andryxa.spring.DTO.UserDTO;
 import ru.andryxa.spring.service.SubscriptionsService;
 
 import java.util.List;
@@ -26,19 +26,19 @@ public class SubscriptionsController {
     }
 
     @PostMapping("/newSubscription")
-    public SubscriptionDTO newSubscription(@RequestParam("userId") User userId,
-                                  @RequestParam("bookId") Book bookId) {
-        SubscriptionDTO subscriptionDTO = new SubscriptionDTO(0, userId,bookId);
-
+    public SubscriptionDTO newSubscription(@RequestParam("userIdDTO") UserDTO userIdDTO,
+                                  @RequestParam("bookIdDTO") BookDTO bookIdDTO) {
+        SubscriptionDTO subscriptionDTO = new SubscriptionDTO(0, userIdDTO,bookIdDTO);
+        System.out.println(subscriptionDTO);
         subscriptionsService.save(subscriptionDTO);
         return subscriptionDTO;
     }
 
-    @PostMapping("/updateSubscription")
+    @PutMapping("/updateSubscription")
     private SubscriptionDTO update(@RequestParam("id") int id,
-                          @RequestParam("userId") User userId,
-                          @RequestParam("bookId") Book bookId) {
-        SubscriptionDTO subscriptionDTO = new SubscriptionDTO(id,userId,bookId);
+                          @RequestParam("userId") UserDTO userIdDTO,
+                          @RequestParam("bookId") BookDTO bookIdDTO) {
+        SubscriptionDTO subscriptionDTO = new SubscriptionDTO(id,userIdDTO,bookIdDTO);
         subscriptionsService.save(subscriptionDTO);
         return subscriptionDTO;
     }

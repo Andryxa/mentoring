@@ -1,7 +1,6 @@
 package ru.andryxa.spring.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.andryxa.spring.DTO.UserDTO;
 import ru.andryxa.spring.entity.User;
 import ru.andryxa.spring.repo.UserRepo;
@@ -9,19 +8,20 @@ import ru.andryxa.spring.repo.UserRepo;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class UserService {
 
     private final UserRepo userRepo;
-    @Autowired
+
     public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
     public UserDTO getUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
         userDTO.setName(user.getName());
-        userDTO.setSurname(userDTO.getSurname());
+        userDTO.setSurname(user.getSurname());
         return userDTO;
     }
 

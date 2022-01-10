@@ -1,7 +1,6 @@
 package ru.andryxa.spring.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.andryxa.spring.DTO.BookDTO;
 import ru.andryxa.spring.entity.Book;
 import ru.andryxa.spring.repo.BookRepo;
@@ -9,12 +8,11 @@ import ru.andryxa.spring.repo.BookRepo;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class BookService {
 
     private final BookRepo bookRepo;
 
-    @Autowired
     public BookService(BookRepo bookRepo) {
         this.bookRepo = bookRepo;
     }
