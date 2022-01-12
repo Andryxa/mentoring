@@ -4,7 +4,7 @@ import ru.andryxa.spring.DTO.UserDTO;
 import ru.andryxa.spring.entity.User;
 
 public class UserMapper {
-    public UserMapper() {
+    private UserMapper() {
     }
 
     public static UserDTO getUserDTO(User user) {

@@ -4,7 +4,8 @@ import ru.andryxa.spring.DTO.SubscriptionDTO;
 import ru.andryxa.spring.entity.Subscriptions;
 
 public class SubscriptionMapper {
-
+    private SubscriptionMapper() {
+    }
 
     public static SubscriptionDTO getSubDTO(Subscriptions subscriptions) {
         SubscriptionDTO subscriptionDTO = new SubscriptionDTO();

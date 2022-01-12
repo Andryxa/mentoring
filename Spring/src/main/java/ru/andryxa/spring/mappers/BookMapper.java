@@ -4,7 +4,7 @@ import ru.andryxa.spring.DTO.BookDTO;
 import ru.andryxa.spring.entity.Book;
 
 public class BookMapper {
-    public BookMapper() {
+    private BookMapper() {
     }
 
     public static BookDTO getBookDTO(Book book) {
