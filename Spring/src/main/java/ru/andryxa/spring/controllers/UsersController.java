@@ -3,16 +3,16 @@ package ru.andryxa.spring.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.andryxa.spring.DTO.UserDTO;
-import ru.andryxa.spring.service.UserService;
+import ru.andryxa.spring.service.impl.UserServiceImpl;
 import java.util.List;
 
 @RestController
 public class UsersController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UsersController(UserService userService) {
+    public UsersController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -22,20 +22,13 @@ public class UsersController {
     }
 
     @PostMapping("/createUser")
-    public UserDTO newUser(@RequestParam("name") String name,
-                           @RequestParam("surname") String surname) {
-        UserDTO user = new UserDTO(0, name, surname);
-        userService.save(user);
-        return user;
+    public UserDTO newUser(@RequestBody UserDTO userDTO) {
+        return userService.createUser(userDTO);
     }
 
     @PutMapping("/updateUser")
-    public UserDTO updateUser(@RequestParam("id") int id,
-                              @RequestParam("name") String name,
-                              @RequestParam("surname") String surname) {
-        UserDTO userDTO= new UserDTO(id, name, surname);
-        userService.save(userDTO);
-        return userDTO;
+    public UserDTO updateUser(@RequestBody UserDTO userDTO) {
+        return userService.updateUser(userDTO);
     }
 
     @DeleteMapping("/deleteUser")

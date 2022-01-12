@@ -4,14 +4,6 @@ import javax.persistence.*;
 
 @Entity
 public class Subscriptions {
-    public Subscriptions(int id,User userId, Book bookId) {
-        this.id = id;
-        this.userId = userId;
-        this.bookId = bookId;
-    }
-
-    public Subscriptions() {
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +17,12 @@ public class Subscriptions {
     @JoinColumn(name = "book_id")
     private Book bookId;
 
+    public Subscriptions(User userId, Book bookId) {
+        this.userId = userId;
+        this.bookId = bookId;
+    }
+
+    public Subscriptions() {}
 
     public int getId() {
         return id;

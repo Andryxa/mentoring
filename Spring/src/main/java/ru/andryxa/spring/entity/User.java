@@ -13,8 +13,7 @@ public class User {
     private String name;
     private String surname;
 
-    public User(int id, String name, String surname) {
-        this.id = id;
+    public User(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }

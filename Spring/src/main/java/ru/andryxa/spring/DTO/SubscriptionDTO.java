@@ -3,39 +3,39 @@ package ru.andryxa.spring.DTO;
 
 public class SubscriptionDTO {
     private int id;
-    private UserDTO userIdDTO;
-    private BookDTO bookIdDTO;
+    private UserDTO userId;
+    private BookDTO bookId;
 
-    public SubscriptionDTO(int id, UserDTO userIdDTO, BookDTO bookIdDTO) {
+    public SubscriptionDTO(int id, UserDTO userId, BookDTO bookId) {
         this.id = id;
-        this.userIdDTO = userIdDTO;
-        this.bookIdDTO = bookIdDTO;
+        this.userId = userId;
+        this.bookId = bookId;
     }
 
     public SubscriptionDTO() {
     }
 
-    public int getIdDTO() {
+    public int getId() {
         return id;
     }
 
-    public void setIdDTO(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public UserDTO getUserIdDTO() {
-        return userIdDTO;
+    public UserDTO getUserId() {
+        return userId;
     }
 
-    public void setUserIdDTO(UserDTO userIdDTO) {
-        this.userIdDTO = userIdDTO;
+    public BookDTO getBookId() {
+        return bookId;
     }
 
-    public BookDTO getBookIdDTO() {
-        return bookIdDTO;
+    public void setUserId(UserDTO userId) {
+        this.userId = userId;
     }
 
-    public void setBookIdDTO(BookDTO bookIdDTO) {
-        this.bookIdDTO = bookIdDTO;
+    public void setBookId(BookDTO bookId) {
+        this.bookId = bookId;
     }
 }
