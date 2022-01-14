@@ -2,7 +2,7 @@ package ru.andryxa.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.andryxa.spring.DTO.UserDTO;
+import ru.andryxa.spring.dto.UserDTO;
 import ru.andryxa.spring.service.impl.UserServiceImpl;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package ru.andryxa.spring.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.andryxa.spring.DTO.BookDTO;
+import ru.andryxa.spring.dto.BookDTO;
 import ru.andryxa.spring.entity.Book;
 import ru.andryxa.spring.repo.BookRepo;
 import ru.andryxa.spring.service.BookService;

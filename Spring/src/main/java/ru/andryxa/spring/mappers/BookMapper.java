@@ -1,11 +1,10 @@
 package ru.andryxa.spring.mappers;
 
-import ru.andryxa.spring.DTO.BookDTO;
+import ru.andryxa.spring.dto.BookDTO;
 import ru.andryxa.spring.entity.Book;
 
 public class BookMapper {
-    private BookMapper() {
-    }
+    private BookMapper() {}
 
     public static BookDTO getBookDTO(Book book) {
         return new BookDTO(book.getId(), book.getName(), book.getAuthor(), book.getCount());

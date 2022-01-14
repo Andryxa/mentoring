@@ -1,6 +1,6 @@
 package ru.andryxa.spring.mappers;
 
-import ru.andryxa.spring.DTO.UserDTO;
+import ru.andryxa.spring.dto.UserDTO;
 import ru.andryxa.spring.entity.User;
 
 public class UserMapper {

@@ -1,4 +1,4 @@
-package ru.andryxa.spring.DTO;
+package ru.andryxa.spring.dto;
 
 
 public class UserDTO {

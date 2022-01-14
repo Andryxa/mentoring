@@ -1,10 +1,11 @@
 package ru.andryxa.spring.service;
 
-import ru.andryxa.spring.DTO.SubscriptionDTO;
+import ru.andryxa.spring.dto.SubscriptionDTO;
 
 import java.util.List;
 
 public interface SubscriptionsService {
+
     List<SubscriptionDTO> subscriptionsList();
 
     SubscriptionDTO createSub(SubscriptionDTO subscriptionDTO);

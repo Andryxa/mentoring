@@ -1,7 +1,7 @@
 package ru.andryxa.spring.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.andryxa.spring.DTO.SubscriptionDTO;
+import ru.andryxa.spring.dto.SubscriptionDTO;
 import ru.andryxa.spring.entity.Subscriptions;
 import ru.andryxa.spring.repo.SubscriptionsRepo;
 import ru.andryxa.spring.service.SubscriptionsService;

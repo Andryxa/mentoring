@@ -1,7 +1,8 @@
 package ru.andryxa.spring.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.andryxa.spring.DTO.BookDTO;
+import ru.andryxa.spring.dto.BookDTO;
 import ru.andryxa.spring.service.BookService;
 
 
@@ -10,7 +11,12 @@ import java.util.List;
 @RestController
 public class BooksController {
 
-    private BookService bookService;
+    private final BookService bookService;
+
+    @Autowired
+    public BooksController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping("/books")
     public List<BookDTO> showBooks() {

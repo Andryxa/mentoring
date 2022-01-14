@@ -1,6 +1,6 @@
 package ru.andryxa.spring.mappers;
 
-import ru.andryxa.spring.DTO.SubscriptionDTO;
+import ru.andryxa.spring.dto.SubscriptionDTO;
 import ru.andryxa.spring.entity.Subscriptions;
 
 public class SubscriptionMapper {

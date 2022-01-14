@@ -1,7 +1,7 @@
 package ru.andryxa.spring.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.andryxa.spring.DTO.UserDTO;
+import ru.andryxa.spring.dto.UserDTO;
 import ru.andryxa.spring.entity.User;
 import ru.andryxa.spring.repo.UserRepo;
 import ru.andryxa.spring.service.UserService;

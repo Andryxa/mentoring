@@ -1,6 +1,6 @@
 package ru.andryxa.spring.service;
 
-import ru.andryxa.spring.DTO.UserDTO;
+import ru.andryxa.spring.dto.UserDTO;
 
 import java.util.List;
 
